@@ -23,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,6 +37,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -205,7 +207,9 @@ public class MainActivity extends AppCompatActivity {
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Conexão Cancelada!", Toast.LENGTH_SHORT).show();
                 finish();
-            } else if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
+            }
+        }
+        if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
                 Uri selectedImageUri = data.getData();
 
                 // Obter uma referencia para armazenar o arquivo em chat_photos
@@ -222,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
             }
-        }
+
     }
 
     // Quando em background remove a autenticaçao
